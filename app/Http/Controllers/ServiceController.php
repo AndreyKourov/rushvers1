@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Option;
+use App\Block;
+use App\User;
+
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -13,7 +17,10 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $option = Option::all();
+        $block = Block::all();
+        //$optionid = Block::pluck('optionid');  , 'id'=>1 
+        return view('service.index', ['page'=>'Service', 'option'=>$option, 'block'=>$block ]);
     }
 
     /**
@@ -54,9 +61,82 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function deledit($id)
+    {
+        $block = Block::find($id);
+        
+        return view('service.deledit', ['page'=>'Service', 'block'=>$block]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delupdate(Request $request, $id)
+    {
+        $block = Block::find($id);
+        // $block = Block::where($id)->get();
+        $users = User::find(1);
+        // $option1 = Option::all();
+        // $block1 = Block::all();
+
+        if ( $users->name === $request->login && $users->password === $request->password )
+        {
+        $block->delete();
+        // return view('about.index', ['page'=>'About', 'option'=>$option1, 'block'=>$block1 ]);
+            return redirect('service');
+        }else {
+            return redirect('service');
+        }
+    }
+
+    public function idedit($id)
+    {
+        $block = Block::find($id);
+        
+        return view('service.idedit', ['page'=>'Service', 'block'=>$block]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function idupdate(Request $request, $id)
+    {
+        $block = Block::find($id);
+        // $block = Block::where($id)->get();
+        $users = User::find(1);
+        // $option1 = Option::all();
+        // $block1 = Block::all();
+        $options = Option::pluck('optionname', 'id');
+
+        if ( $users->name === $request->login && $users->password === $request->password )
+        {
+            return view('service.edit', ['page'=>'Service', 'block'=>$block, 'options'=>$options ]);
+            // return redirect('about');
+        }else {
+            return redirect('service');
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
-        //
+        $block = Block::find($id);
+        $options = Option::pluck('optionname', 'id');
+
+        return view('service.edit', ['page'=>'Service', 'block'=>$block, 'options'=>$options]);
     }
 
     /**
@@ -68,7 +148,20 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $block = Block::find($id);
+        $block->optionid = $request->optionid;
+        $block->title = $request->title;
+        $block->content = $request->content;
+
+        $fname = $request->file('imagepath');
+        if($fname !== null) {
+            $original_name = $request->file('imagepath')->getClientOriginalName();
+            $request->file('imagepath')->move(public_path().'/images', $original_name);
+            $block->imagepath = 'images/'.$original_name;
+        }
+
+        $block->save();
+        return redirect('service/');
     }
 
     /**

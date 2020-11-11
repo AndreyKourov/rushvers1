@@ -8,13 +8,12 @@
 <h1 class="text-center mb-3 display-4">Edit</h1>
 <hr>
 <div class="container">
-    {{-- <div class="row">
+    <!-- <div class="row">
     <div class="col">
     </div>
-    </div> --}}
+    </div> -->
     
-    
-    {!! Form::model($block, ['method'=>'put', 'files'=>true , 'class'=>'form', 'route'=>['admin.update', $block->id]]) !!}
+    {!! Form::model($block, ['method'=>'put', 'files'=>true ,'route'=>['service.update', $block->id]]) !!}
     
     <div class="form-group row">
         {!! Form::label('optionid', 'Select Option', ['class'=>'col-md-2']) !!}
@@ -25,7 +24,7 @@
         {!! Form::text('title', $block->title, ['class'=>'form-control col-md-10']) !!}
     </div>
     <div class="form-group row">
-        {!! Form::label('_content', 'Edit content', ['class'=>'col-md-2']) !!}
+        {!! Form::label('content', 'Edit content', ['class'=>'col-md-2']) !!}
         {!! Form::textarea('content', $block->content, ['class'=>'form-control col-md-10']) !!}
     </div>
     <div class="form-group row">

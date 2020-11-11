@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Option;
 use App\Block;
+use App\User;
 
 use Illuminate\Http\Request;
 
@@ -51,7 +52,9 @@ class AboutController extends Controller
      */
     public function show($id)
     {
-        //
+        // $block = Block::find($id);
+        
+        // return view('about.edit2edit', ['page'=>'Admin', 'block'=>$block]);
     }
 
     /**
@@ -62,7 +65,47 @@ class AboutController extends Controller
      */
     public function edit($id)
     {
-        //
+        $block = Block::find($id);
+        
+        return view('about.edit', ['page'=>'About', 'block'=>$block]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit2edit($id)
+    {
+        $block = Block::find($id);
+        
+        return view('about.edit2edit', ['page'=>'About', 'block'=>$block]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update2edit(Request $request, $id)
+    {
+        $block = Block::find($id);
+        // $block = Block::where($id)->get();
+        $users = User::find(1);
+        // $option1 = Option::all();
+        // $block1 = Block::all();
+        $options = Option::pluck('optionname', 'id');
+
+        if ( $users->name === $request->login && $users->password === $request->password )
+        {
+            return view('admin.edit', ['page'=>'About', 'block'=>$block, 'options'=>$options ]);
+            // return redirect('about');
+        }else {
+            return redirect('about');
+        }
     }
 
     /**
@@ -74,7 +117,20 @@ class AboutController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $block = Block::find($id);
+        // $block = Block::where($id)->get();
+        $users = User::find(1);
+        // $option1 = Option::all();
+        // $block1 = Block::all();
+
+        if ( $users->name === $request->login && $users->password === $request->password )
+        {
+        $block->delete();
+        // return view('about.index', ['page'=>'About', 'option'=>$option1, 'block'=>$block1 ]);
+            return redirect('about');
+        }else {
+            return redirect('about');
+        }
     }
 
     /**

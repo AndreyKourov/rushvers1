@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +13,40 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <title>Rushvers1</title>
+    <style>
+        /* body {
+            background-image: url(images/fonfinich.jpg);
+        }
+        .opacity {
+            background: rgba( 0, 0, 0, 0.5);
+
+            margin-left: 0px;
+            margin-right: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+        } */
+        .tophead {
+            margin-top: 3%;
+        }
+
+    </style>
+    <link rel="shortcut icon" type="image/svg" href="{{ asset('images/2028205.svg') }}"/>
 </head>
 <body>    
-
+{{-- nav nav-pills nav-fill --}}
 @section('menu')
-        <div class='container-fluid mb-3'>
-            <div class="row">
-                <nav class='mainmenu col-12'>
-                    <ul class='nav nav-pills nav-fill'>
-                        <li class='nav-item'>
+        
+                <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
+                <a  class="navbar-brand" href="{{url('about')}}" class="nav-link {{$page === 'About' ? 'active' : ''}}">
+                    <img src="{{ asset('images/2028205.svg') }}" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+                        RushIn
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                    <li class='nav-item'>
                             <a href="{{url('about')}}" class="nav-link {{$page === 'About' ? 'active' : ''}}">About</a>
                         </li>
                         <li class='nav-item'>
@@ -27,27 +56,75 @@
                             <a href="{{url('training')}}" class="nav-link {{$page === 'Training' ? 'active' : ''}}">Training</a>
                         </li>
                         <li class='nav-item'>
-                            <a href="{{url('admin/create')}}" class="nav-link {{$page === 'Admin' ? 'active' : ''}}">Admin</a>
+                            <a href="{{url('admin')}}" class="nav-link {{$page === 'Admin' ? 'active' : ''}}">Admin</a>
                         </li>
                     </ul>
-                </nav>
-            </div>
-        </div>
+                </div>
+                </nav>   
+                
     @show
 
-    <div class="container-fluid">
+    <div class="container-fluid tophead">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" style="margin: 0; padding: 0;">
                 @yield('content')
             </div>
         </div>
     </div>
-
+    
     @section('footer')
-        <div class='container-fluid bg-primary mt-5 py-3 footer'>
+        <div class='container-fluid bg-success mt-5 py-3 footer'>
             <div class='row'>
-                <div class='col-12 text-center'>
-                    Footer 2020
+                <div class='col-md-3 text-center'>
+                    
+                </div>
+                <div class='col-md-3 text-center'>
+                    
+                </div>
+                <div class='col-6 col-md-3'>
+                    <h6>
+                        Contacts
+                    </h6>
+                    <div class="mb-1">
+                        <img src="{{ asset('images/telephone.svg') }}" width="20" height="20" class="d-inline-block align-top" alt="" loading="lazy"> +7 232 132 2323
+                    </div>
+                    <div>
+                        <img src="{{ asset('images/home3.svg') }}" width="20" height="20" class="d-inline-block align-top" alt="" loading="lazy"> 11 Barron Pl, Bossley 2176, Australia
+                    </div>
+                </div>
+                <div class='col-6 col-md-3'>
+                    <h6>
+                        Social networks
+                    </h6>
+                    <div class="mb-1">
+                    <a href="https://www.instagram.com/">
+                        <img src="{{ asset('images/instagram-logo.png') }}" width="20" height="20" class="d-inline-block align-top" alt="" loading="lazy">
+                    </a>
+                    </div>
+                    <div class="mb-1">
+                    <a href="https://twitter.com/?lang=ru">
+                        <img src="{{ asset('images/twitter.png') }}" width="20" height="20" class="d-inline-block align-top" alt="" loading="lazy">
+                    </a>
+                    </div>
+                    <div class="mb-1">
+                    <a href="https://https://www.facebook.com/">
+                        <img src="{{ asset('images/facebook.png') }}" width="20" height="20" class="d-inline-block align-top" alt="" loading="lazy">
+                    </a>
+                    </div>
+                </div>
+            </div>
+            <div class='row mt-3'>
+                <div class='col-md-3 text-center'>
+                    
+                </div>
+                <div class='col-md-3 text-center'>
+                    
+                </div>
+                <div class='col-md-3 text-center'>
+                   
+                </div>
+                <div class='col-6 col-md-3'>
+                    <h6>RushIn official site. &#169 All rights reserved.</h6>
                 </div>
             </div>
         </div>

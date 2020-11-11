@@ -5,8 +5,10 @@
 @endsection
 
 @section('content')
+<h1 class="text-center mb-3 display-4">{{$page}}</h1>
+<hr class="text-center mb-3">
 <div class="container">
-<h1>{{$page}}</h1>
+
 
 @if(session('errors'))
     <div class='alert alert-danger'>
@@ -26,10 +28,10 @@
 
 <div class="form-group row"> 
 
-{{--
+    {{--
     {!! Form::label('optionid', 'Option Name', ['class'=>'col-md-2']) !!}
     {!! Form::select('optionid', $users, ['class'=>'col-md-8']) !!}
---}}    
+    --}}  
 
     {!! Form::label('optionid', 'Select Option', ['class'=>'col-md-2']) !!}     
     {!! Form::select('optionid', $options, $block->optionid, ['class'=>'form-control col-md-10']) !!}
@@ -52,7 +54,9 @@
 </div>
 
 
-<button type="submit" class="btn btn-primary">Add Block</button>
+<button type="submit" class="btn btn-success">Add Block</button>
 {!! Form::close() !!}
+
+
 </div>
 @endsection    

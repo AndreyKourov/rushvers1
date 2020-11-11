@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Option;
 use App\Block;
+use App\User;
 
 use Illuminate\Http\Request;
 
@@ -16,9 +17,41 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        //$user = User::all();
+        //$user = User::pluck('name', 'password');
+        //$options = new Option;
+        $users = new User;
+        return view('admin.index', [ 'users'=>$users, 'page'=>'Admin' ]);
+        //return view('admin.index', [ 'options'=>$options, 'page'=>'Admin' ]);
+        //return '<h1>From method, class TestController</h1>';
+        
     }
 
+    public function createadmin(Request $request)
+    {
+        // $user -> name === $request -> login && $user -> password = $request -> password )
+        // $block = new Block;
+        // $options = Option::pluck('optionname', 'id');
+        // return view('admin.create', [ 'block'=>$block, 'options'=>$options, 'page'=>'Admin']);
+        //$user = User::all();
+       // $options = Option::where('id', 1)->get();
+       $block = new Block;
+       $options = Option::pluck('optionname', 'id');
+       $users1 = new User;
+       //return view('admin.create', [ 'block'=>$block, 'options'=>$options, 'page'=>'Admin']);
+        
+       $users = User::find(1);
+        //foreach($options as $optiab) {}
+        if ( $users->name === $request->login && $users->password === $request->password)
+        {
+            return view('admin.create', [ 'block'=>$block, 'options'=>$options,'page'=>'Admin']);
+        } else {
+            return view('admin.index', [ 'users'=>$users1, 'page'=>'Admin' ]);
+        }
+        //return redirect('admin.create', [ 'page'=>'Admin']);
+
+    }
+ 
     /**
      * Show the form for creating a new resource.
      *
@@ -75,7 +108,7 @@ class AdminController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
+
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -122,7 +155,45 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $block = Block::find($id);
+        // $users = User::find(1);
+
+        // if ( $users->password === $request->password )
+        // {
         $block->delete();
         return redirect('about');
+        // }else {
+        //     return redirect('about');
+        // }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+      * @param  \Illuminate\Http\Request  $request   Request $request,
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyabout(Request $request, $id)
+    {
+        $block = Block::find($id);
+        // $block = Block::where($id)->get();
+        $users = User::find(1);
+        // $option1 = Option::all();
+        // $block1 = Block::all();
+
+        if ( $users->password === $request->password )
+        {
+        $block->delete();
+        // return view('about.index', ['page'=>'About', 'option'=>$option1, 'block'=>$block1 ]);
+        return redirect('about');
+        }else {
+            return redirect('about');
+        }
+        //return '<h1>From method, class TestController</h1>';    
+
+    }
+    
 }
+
+
+        
