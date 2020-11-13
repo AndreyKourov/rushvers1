@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Option;
 use App\Block;
 use App\User;
+use Session;
 
 use Illuminate\Http\Request;
 
@@ -39,11 +40,19 @@ class AdminController extends Controller
        $options = Option::pluck('optionname', 'id');
        $users1 = new User;
        //return view('admin.create', [ 'block'=>$block, 'options'=>$options, 'page'=>'Admin']);
-        
+       // $users->name === $request->login && $users->password === $request->password)
        $users = User::find(1);
+       $login = $request->login;
+       $pass = $request->password;
+       
+       $login_trim = trim(htmlspecialchars($login));
+       $pass_trim = trim(htmlspecialchars($pass));
+       $name = $users->name;
+
         //foreach($options as $optiab) {}
-        if ( $users->name === $request->login && $users->password === $request->password)
-        {
+        if ( $name === $login_trim && $users->password === $pass_trim)
+        {   
+            session(['name' => $name]);
             return view('admin.create', [ 'block'=>$block, 'options'=>$options,'page'=>'Admin']);
         } else {
             return view('admin.index', [ 'users'=>$users1, 'page'=>'Admin' ]);
@@ -191,6 +200,11 @@ class AdminController extends Controller
         }
         //return '<h1>From method, class TestController</h1>';    
 
+    }
+    public function logout(Request $request)
+    {
+        Session::forget('name');
+        return redirect('about');
     }
     
 }

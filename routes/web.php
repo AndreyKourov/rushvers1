@@ -23,6 +23,7 @@ Route::resource('service', 'ServiceController');
 Route::resource('training', 'TrainingController');
 //Route::get('admin/index', 'AdminController@index');
 Route::post('admin/createadmin', 'AdminController@createadmin');
+Route::post('admin/logout', 'AdminController@logout');
 Route::get('about/{id}/edit2edit', 'AboutController@edit2edit');
 Route::put('aboutet/{id}', 'AboutController@update2edit');
 

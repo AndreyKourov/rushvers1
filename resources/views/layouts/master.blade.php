@@ -55,13 +55,30 @@ session_start();
                         <li class='nav-item'>
                             <a href="{{url('training')}}" class="nav-link {{$page === 'Training' ? 'active' : ''}}">Training</a>
                         </li>
-                        <li class='nav-item'>
+                        <!-- <li class='nav-item'>
                             <a href="{{url('admin')}}" class="nav-link {{$page === 'Admin' ? 'active' : ''}}">Admin</a>
-                        </li>
+                        </li> -->
+                        @if (Session::get('name'))
+                            <li class='nav-item'>
+                                <a href="{{url('admin/create')}}" class="nav-link {{$page === 'Admin' ? 'active' : ''}}">Admin</a>
+                            </li>
+                        @else
+                            <li class='nav-item'>
+                                <a href="{{url('admin')}}" class="nav-link {{$page === 'Admin' ? 'active' : ''}}">Login</a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
-                </nav>   
-                
+                </nav>
+                {{-- 
+                {!! Form::model($users, ['action'=>'AdminController@createadmin', 'method'=>'post' , 'class'=>'form']) !!}
+                    <div class="form-group row">
+                        {!! Form::text('login', '', ['class'=>'form-control', 'placeholder'=>'Enter your login']) !!}
+                        {!! Form::text('password', '', ['class'=>'form-control', 'placeholder'=>'Enter your password']) !!}
+                    <button type="submit" class="btn btn-success">Login</button>
+                    </div>
+                {!! Form::close() !!}
+                --}}    
     @show
 
     <div class="container-fluid tophead">
