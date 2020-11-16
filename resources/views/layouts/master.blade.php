@@ -55,6 +55,9 @@ session_start();
                         <li class='nav-item'>
                             <a href="{{url('training')}}" class="nav-link {{$page === 'Training' ? 'active' : ''}}">Training</a>
                         </li>
+                        <li class='nav-item'>
+                            <a href="{{url('about/contacts')}}" class="nav-link {{$page === 'Contacts' ? 'active' : ''}}">Contacts</a>
+                        </li>
                         <!-- <li class='nav-item'>
                             <a href="{{url('admin')}}" class="nav-link {{$page === 'Admin' ? 'active' : ''}}">Admin</a>
                         </li> -->
@@ -88,6 +91,8 @@ session_start();
             </div>
         </div>
     </div>
+
+    <!-- style="margin: 0; padding: 0;" -->
     
     @section('footer')
         <div class='container-fluid bg-success mt-5 py-3 footer'>

@@ -31,6 +31,13 @@
         {!! Form::label('imagepath', 'Edit image', ['class'=>'col-md-2']) !!}
         {!! Form::file('imagepath', ['class'=>'form-control col-md-10']) !!}
     </div>
+    <div class="form-group row">
+    <div class="col-12 col-md-2">Current image</div>
+    <div class="card col-12 col-md-8">
+        <img src="{{asset($block->imagepath)}}" alt="" class="card-img-top">
+    </div>
+    <div class="col-12 col-md-2"></div>
+    </div>
     
         {!! Form::submit('Save edit block', ['class'=>'btn btn-success']) !!}
                 

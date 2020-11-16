@@ -16,7 +16,7 @@
 // });
 Route::get('/', 'AboutController@index');
 
-
+Route::get('about/contacts', 'AboutController@contacts');
 Route::resource('admin', 'AdminController');
 Route::resource('about', 'AboutController');
 Route::resource('service', 'ServiceController');
@@ -39,7 +39,7 @@ Route::put('training/delupdate/{id}', 'TrainingController@delupdate');
 Route::get('training/{id}/idedit', 'TrainingController@idedit');
 Route::put('training/idupdate/{id}', 'TrainingController@idupdate');
 
-
+Route::post('about/search', 'AboutController@search');
 
 // Route::put('admin/destroyabout/{id}', 'AdminController@destroyabout');
 

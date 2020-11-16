@@ -6,7 +6,13 @@
 
 @section('content')
 
-
+        {!! Form::open(['action'=>'AboutController@search', 'class'=>'form', 'method'=>'post']) !!}
+            <div class="input-group">
+                {!! Form::text('searchform', '', ['class'=>'form-control col-md-3 ml-2', 'placeholder'=>'Enter title']) !!}
+                <button class="d-lg-inline btn btn-success ml-2 mr-2" type="submit">Search</button>
+            </div>
+        {!! Form::close() !!}
+   
         <h1 class="text-center text-break display-4">About us</h1>
         <hr>
         <img src="{{ asset('images/AboutT2_1920x400.jpg') }}" style="margin: 0px; padding: 0px;" class="container-fluid d-flex align-items-center justify-content-center" alt="">
@@ -16,8 +22,8 @@
         <div class="col">        
 
             <div class="row mt-3">  
-            <p class="text-center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et quasi ipsam nemo accusamus, consequatur neque veritatis consectetur ex dolore praesentium soluta, similique id possimus quo facere? Harum quae error voluptates, ducimus repudiandae, corrupti exercitationem blanditiis debitis amet ut quod, mollitia delectus. Quibusdam officia dolor consequuntur obcaecati minus quia voluptates doloremque, sed est temporibus eum cupiditate dignissimos reiciendis suscipit eos placeat adipisci eligendi labore doloribus velit quis totam accusantium harum! Vel similique assumenda error consequatur praesentium rem quae iusto. Voluptatum temporibus quos autem deleniti, sed modi quasi officia atque? Eius voluptatem at animi, earum quod aliquam autem pariatur soluta quam nulla.</p>  
-            
+            <p class="lead" style="margin: 10px; margin-bottom: 30px;"><strong><span class="text-success">RushIn. </span></strong>Semi-professional motocross racing team. Includes full-fledged preparation of athletes and motor vehicles for participation in competitions of various levels. Special physical training aimed at increasing the endurance, coordination and functionality of the athlete, which is necessary in connection with the specific loads in motocross. In the preparation of the athlete, proper nutrition also plays an important role. In our team, along with physical activity, an individual meal plan is also drawn up for each specific smotman. Motocross trainings are held on tracks of various levels and training of athletes. The set is made in groups of the same age and level of training. Motorcycle maintenance, preparation for different types of tracks, tuning, suspension tuning. If you are ready to move to a completely different level of training, then join our club.</p>  
+
             <div class="col-0 col-md-2"></div>
             <div class="col-12 col-md-8">
             @foreach($block as $blocktitle)

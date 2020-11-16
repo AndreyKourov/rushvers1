@@ -18,10 +18,20 @@ class AboutController extends Controller
     public function index()
     {
         $option = Option::all();
-        $block = Block::all();
+        $block = Block::orderBy('updated_at', 'desc')->get();
+        //$block = Block::orderBy('updated_at', 'asc')->get();
+        // $block = Block::all();
         //$optionid = Block::pluck('optionid');  , 'id'=>1 
         return view('about.index', ['page'=>'About', 'option'=>$option, 'block'=>$block ]);
     }
+
+
+    public function contacts()
+    {
+        return view('about/contacts', ['page'=>'Contacts']);
+    }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -142,5 +152,14 @@ class AboutController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->searchform;
+        $search = '%'.$search.'%';
+        $block = Block::all();
+        $titles = Block::where('title', 'like', $search)->get();
+        return view ('about.search', ['page'=>'About', 'block'=>$block, 'title'=>$titles, 'id'=>0]);
     }
 }
